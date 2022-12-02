@@ -2,7 +2,7 @@
 ![ABC GOOasla](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 ### 1. 安装所有必要的软件(如果未安装)
 ```base
-apt update && apt install -y curl mlocate unzip zip gzip fuse
+apt update && apt install -y curl mlocate unzip zip gzip fuse net-tools
 ```
 ### 2. 安装 科学上网（可选）
 ```base
@@ -60,9 +60,33 @@ alias stop="/usr/local/tomcat7/bin/shutdown.sh"
 ```
 ### 8. 将upload.sh下载到$HOME/下，修改权限为755，这样aria2下载完成后自动上传文件到OD
 
-### 9. 大功告成
+### 9. 安装docker到debian
 
-### 10. 1~9操作集合到一个shell
+Debian 9: 需要手动安装  
+```bash
+apt update &&
+apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common &&
+curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - &&
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" &&
+apt update &&
+apt install docker-ce
+```
+Debian 10：可以一键安装  
+```bash
+curl -fsSLo- get.docker.com | /bin/sh
+```
+
+可选安装项目:
+
+```bash
+docker pull denghongcai/forsaken-mail
+docker run -d -p 25:25 -p 3000:3000 denghongcai/forsaken-mail
+
+docker pull vanyouseea/o365:dev_https
+docker run -d -p 8443:8443 -v /root/o365/data:/data vanyouseea/o365:dev_https
+```
+
+### 10. 1~8操作集合到一个shell
 ```base
 wget https://raw.githubusercontent.com/vanyouseea/hlh/master/all.sh && bash all.sh
 ```
@@ -104,4 +128,11 @@ call e5 resful API via soapUI
 
 ### 注册应用
 https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=e381aebb-dbbf-4a6f-a9c2-34ebfbdf9424&response_type=code&scope=Files.ReadWrite.All%20Files.ReadWrite.AppFolder%20Files.ReadWrite.Selected%20Mail.ReadWrite%20Mail.Send%20offline_access%20Sites.Read.All%20User.Read&redirect_uri=http://localhost:12345
+
+### Login to 10086 with F12  
+use sessionstorage.getAssessor_token get below info:  
+session:  
+phoneno:  
+userId:  
+assessorId:  
 
